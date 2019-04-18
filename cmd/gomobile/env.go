@@ -137,7 +137,8 @@ func envInit() (err error) {
 		default:
 			panic(fmt.Errorf("unknown GOARCH: %q", arch))
 		}
-		cflags += " -fembed-bitcode"
+		//cflags += " -fembed-bitcode"
+		cflags += " -Wno-nullability-completeness"
 		if err != nil {
 			return err
 		}
@@ -146,9 +147,9 @@ func envInit() (err error) {
 			"GOARCH="+arch,
 			"CC="+clang,
 			"CXX="+clang+"++",
-			"CGO_CFLAGS="+cflags+" -arch "+archClang(arch),
-			"CGO_CXXFLAGS="+cflags+" -arch "+archClang(arch),
-			"CGO_LDFLAGS="+cflags+" -arch "+archClang(arch),
+			"CGO_CFLAGS="+cflags+" -arch "+archClang(arch)+" "+os.Getenv("CGO_CFLAGS"),
+			"CGO_CXXFLAGS="+cflags+" -arch "+archClang(arch)+" "+os.Getenv("CGO_CXXFLAGS"),
+			"CGO_LDFLAGS="+cflags+" -arch "+archClang(arch)+" "+os.Getenv("CGO_LDFLAGS"),
 			"CGO_ENABLED=1",
 		)
 		darwinEnv[arch] = env
