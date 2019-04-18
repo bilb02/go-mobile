@@ -3,4 +3,4 @@
 // license that can be found in the LICENSE file.
 
 // Package glutil implements OpenGL utility functions.
-package glutil // import "golang.org/x/mobile/exp/gl/glutil"
+package glutil // import "github.com/bilb02/go-mobile/exp/gl/glutil"
